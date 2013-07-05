@@ -33,6 +33,3 @@ LeslieDepl = function(data, site.spec.p = F, Ricker.correction=T)
   }  
   return(data.frame(N.hat=N.hat, p.hat=p.hat))
 } 
-
-
-# This is a test to see if GitHub can recognize this change
