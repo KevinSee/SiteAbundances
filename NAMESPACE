@@ -1,0 +1,11 @@
+## simple NAMESPACE
+## Tell R what functions the user should be able to access after library(package) call
+
+## export functions
+export(
+  ChapmanMR,
+  GuyBrownDepl,
+  JackKnifeDepl,
+  LeslieDepl,
+  TwoPassDepl
+)
