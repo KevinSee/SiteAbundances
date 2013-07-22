@@ -2,7 +2,7 @@
 # Leslie estimator
 # to estimate abundance from multiple pass delpletion data
 ###############################################################
-LeslieDepl = function(data, site.spec.p = F, Ricker.correction=T)
+LeslieDepl = function(data, site.spec.p = FALSE, Ricker.correction=TRUE)
   # pass in data frame with catches for each pass across each row
 {
   n.pass = ncol(data)
@@ -17,6 +17,7 @@ LeslieDepl = function(data, site.spec.p = F, Ricker.correction=T)
     mod1 = lm(C ~ -1 + site.num + K, data=long.df)
     N.hat = coef(mod1)[1:(which(names(coef(mod1))=="K")-1)]
     p.hat = -coef(mod1)[which(names(coef(mod1))=="K")]
+    N.hat.SE = summary(mod1)$sigma / p.hat * sqrt((1/nrow(data)) + ((N.hat - with(long.df, tapply(K, site.num, mean))) / (nrow(data)-1) * with(long.df, tapply(K, site.num, var))))
   }
   
 #   if(site.spec.p==T) # fit a model with site specific catchability coefficients
@@ -30,6 +31,9 @@ LeslieDepl = function(data, site.spec.p = F, Ricker.correction=T)
     mod2 = lmer(C ~ -1 + site.num + K + (-1 + K | site.num), data=long.df)
     N.hat = fixef(mod2)[grepl('site.num', names(fixef(mod2)))]
     p.hat = -c(fixef(mod2)["K"] + ranef(mod2)$site.num[,1])
-  }  
-  return(data.frame(N.hat=N.hat, p.hat=p.hat))
+    # not working yet
+#     N.hat.SE = summary(mod2)@sigma / p.hat * sqrt((1/nrow(data)) + ((N.hat - with(long.df, tapply(K, site.num, mean))) / (nrow(data)-1) * with(long.df, tapply(K, site.num, var))))
+    N.hat.SE = NA
+  }
+  return(data.frame(N.hat=N.hat, N.hat.SE=N.hat.SE, p.hat=p.hat))
 } 

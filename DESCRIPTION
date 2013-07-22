@@ -2,13 +2,13 @@ Package: SiteAbundances
 Type: Package
 Title: Template
 Version: 1.0
-Date: 2013-7-5
+Date: 2013-7-22
 Depends: R (>= 3.0.1), lme4
 Suggests: 
 Author: Kevin See, QCI, Seattle, USA
 Maintainer: Kevin See - Quantitative Consultants, Inc. <kevin@qcinc.org>
 Description: This package contains functions for estimating abundance from 2-event mark-recapture or depletion methods
-License: 
+License: GPL-2 | GPL-3
 LazyData: no
 BuildVignettes: no
 ByteCompile: TRUE

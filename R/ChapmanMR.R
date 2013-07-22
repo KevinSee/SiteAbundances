@@ -2,7 +2,7 @@
 # modified Lincoln-Petersen (Chapman) estimator
 # to estimate abundance from single mark / single recap mark recapture dataa
 ###############################################################
-ChapmanMR = function(data, rmInvalid=T){
+ChapmanMR = function(data, rmInvalid=TRUE){
   if(is.data.frame(data)==F) data = as.data.frame(data)
   names(data) = c('M', 'C', 'R')
   N.hat = with(data, ((M + 1) * (C + 1)) / (R + 1) -1)
