@@ -23,6 +23,7 @@ JackKnifeDepl(data, group = NULL, grouped = FALSE)
 }
 \value{
   \item{N.hat}{ - estimate of abundance}
+  \item{N.hat.SE}{ - standard error of the estimate of abundance. Based on number of passes and catch on final pass}
   \item{p.hat}{ - estimate of the probability of capture}
 }
 \references{
