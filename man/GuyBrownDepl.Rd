@@ -17,7 +17,7 @@ GuyBrownDepl(data)
   \item{data}{dataframe or matrix with three columns containing the counts from each pass.}
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+%%  ~~ If necessary, more details than the description above ~~ 
 }
 \value{
 Returns a dataframe consisting of 3 columns:

@@ -9,7 +9,7 @@
 a function to estimate abundance based on a two pass depletion method
 }
 \usage{
-TwoPassDepl(data, rmInvalid=F, p.threshold=0.2)
+TwoPassDepl(data, rmInvalid=FALSE, p.threshold=0.2)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
