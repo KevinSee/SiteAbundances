@@ -14,10 +14,18 @@ LeslieDepl = function(data, site.spec.p = FALSE, Ricker.correction=TRUE)
   
   if(site.spec.p==F) # fit Leslie model, assuming common catchability
   {	
-    mod1 = lm(C ~ -1 + site.num + K, data=long.df)
-    N.hat = coef(mod1)[1:(which(names(coef(mod1))=="K")-1)]
-    p.hat = -coef(mod1)[which(names(coef(mod1))=="K")]
-    N.hat.SE = summary(mod1)$sigma / p.hat * sqrt((1/nrow(data)) + ((N.hat - with(long.df, tapply(K, site.num, mean))) / (nrow(data)-1) * with(long.df, tapply(K, site.num, var))))
+    if(nlevels(long.df$site.num)>1) {
+      mod1 = lm(C ~ -1 + site.num + K, data=long.df)
+      p.hat = -coef(mod1)[which(names(coef(mod1))=="K")]
+      N.hat = coef(mod1)[1:(which(names(coef(mod1))=="K")-1)] / p.hat
+      N.hat.SE = summary(mod1)$sigma / p.hat * sqrt((1/nrow(data)) + ((N.hat - with(long.df, tapply(K, site.num, mean))) / (nrow(data)-1) * with(long.df, tapply(K, site.num, var))))
+    }
+    if(nlevels(long.df$site.num)==1) {
+      mod1 = lm(C ~ K, data=long.df)
+      p.hat = -coef(mod1)[which(names(coef(mod1))=="K")]
+      N.hat = coef(mod1)[1] / p.hat
+      N.hat.SE = summary(mod1)$sigma / p.hat * sqrt((1/nrow(data)) + ((N.hat - with(long.df, tapply(K, site.num, mean))) / (nrow(data)-1) * with(long.df, tapply(K, site.num, var))))
+    }
   }
   
 #   if(site.spec.p==T) # fit a model with site specific catchability coefficients
