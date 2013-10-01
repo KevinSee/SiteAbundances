@@ -26,7 +26,7 @@ TwoPassDepl(data, rmInvalid=FALSE, p.threshold=0.2)
     \item{p.hat}{ - estimate of the probability of capture}
 }
 \references{
-%% ~put references to the literature/web site here ~
+Lockwood, Roger N. and J. C. Schneider. 2000. Stream fish population estimates by markand-recapture and depletion methods. Chapter 7 in Schneider, James C. (ed.) 2000. Manual of fisheries survey methods II: with periodic updates. Michigan Department of Natural Resources, Fisheries Special Report 25, Ann Arbor.
 }
 \author{
 Kevin See, QCI, Seattle, WA
