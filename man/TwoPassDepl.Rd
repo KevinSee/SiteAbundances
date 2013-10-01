@@ -23,6 +23,7 @@ TwoPassDepl(data, rmInvalid=FALSE, p.threshold=0.2)
 }
 \value{
     \item{N.hat}{ - estimate of abundance}
+    \item{N.hat.SE}{ - standard error of the estimate of abundance}
     \item{p.hat}{ - estimate of the probability of capture}
 }
 \references{
