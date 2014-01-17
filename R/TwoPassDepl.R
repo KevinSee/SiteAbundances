@@ -10,9 +10,11 @@ TwoPassDepl = function(data, rmInvalid=FALSE, p.threshold=0.2){
   # if no fish caught on either pass, make N.hat 0
   N.hat[which(y1==0 & y2==0)] = 0
   p.hat[which(y1==0 & y2==0)] = N.hat.SE[which(y1==0 & y2==0)] = NA
-  # if the 2nd pass caught more fish than the first, make it invalid
-  N.hat[which(y1<=y2)] = N.hat.SE[which(y1<=y2)] = p.hat[which(y1<=y2)] = NA
+  # if the 2nd pass caught more fish than the first, make it invalid, and list the total as the sum of two passes
+  N.hat[which(y1<=y2)] = rowSums(data)[which(y1<=y2)]
+  N.hat.SE[which(y1<=y2)] = p.hat[which(y1<=y2)] = NA
+  Valid = ifelse(y1>y2 | (y1==0 & y2==0), TRUE, FALSE)
   # mark as invalid any estimate with p.hat < p.threshold
   if(rmInvalid==T) N.hat[p.hat<p.threshold] = N.hat.SE[p.hat<p.threshold] = NA
-  return(data.frame(N.hat = N.hat, N.hat.SE=N.hat.SE, p.hat=p.hat))
+  return(data.frame(N.hat = N.hat, N.hat.SE=N.hat.SE, p.hat=p.hat, Valid=Valid))
 }
