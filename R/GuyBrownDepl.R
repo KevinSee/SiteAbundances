@@ -11,5 +11,6 @@ GuyBrownDepl = function(data){
   p.hat = (3*x - y -sqrt(y^2 + 6*x*y - 3*x^2)) / (2*x)
   # calculate standard error of N.hat
   N.hat.SE = sqrt((N.hat*(1-p.hat^3)*p.hat^3) / ((1-p.hat^3)^2 - (3*(1-p.hat))^2*p.hat^2))
-  return(data.frame(N.hat=N.hat, N.hat.SE=N.hat.SE, p.hat=p.hat))
+  valid = ifelse(N.hat<0 | N.hat==Inf | N.hat==-Inf, F, T)
+  return(data.frame(N.hat=N.hat, N.hat.SE=N.hat.SE, p.hat=p.hat, Valid=valid))
 }

@@ -30,13 +30,21 @@ JackKnifeDepl = function(data, group = NULL, grouped=FALSE)
         p.hat=NA
         N.est.SE=NA
         N.est = 0
+        valid = T
       } 
       if(sum(rowSums(data[data$grp==group,c('p1', 'p2', 'p3')]))>0) {
         p.hat = 1 - (sum(rowSums(data[data$grp==group,c('p1', 'p2', 'p3')])) - sum(data$p1[data$grp==group])) / (sum(rowSums(data[data$grp==group,c('p1', 'p2', 'p3')])) - sum(data$p3[data$grp==group]))
         N.est = data$p1[data$grp==group] + data$p2[data$grp==group] + data$p3[data$grp==group]/p.hat
         N.est.SE = 3*2*data$p3[data$grp==group]
+        valid=T
+        if(N.est==Inf) {
+        	N.est = rowSums(data[data$grp==group,c('p1', 'p2', 'p3')])
+        	N.est.SE = NA
+        	p.hat = NA
+        	valid=F
+        }
       }
-        results[match(rownames(subset(data, grp==group)), rownames(results)),] = data.frame(N.hat = N.est, N.hat.SE=N.est.SE, p.hat=p.hat)
+        results[match(rownames(subset(data, grp==group)), rownames(results)),] = data.frame(N.hat = N.est, N.hat.SE=N.est.SE, p.hat=p.hat, Valid=valid)
     }
   }
   return(results)
