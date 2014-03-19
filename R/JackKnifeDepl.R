@@ -29,8 +29,8 @@ JackKnifeDepl = function(data, group = NULL, grouped=FALSE)
   if(grouped==T) {
     for(group in unique(data$grp)) {
       if(sum(rowSums(data[data$grp==group,c('p1', 'p2', 'p3')]))==0) {
-        p.hat=NA
-        N.est.SE=NA
+        p.hat = NA
+        N.est.SE = NA
         N.est = 0
         valid = T
       } 
